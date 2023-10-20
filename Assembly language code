@@ -1,0 +1,15 @@
+top:
+addi x2,x0,10
+add  x2,x2,x2
+jal x1,jump
+addi x3,x2,30
+lui x4,1
+auipc x5,0x1000
+bne x2,x3,label
+jump:
+add x6,x3,x2
+jalr x0,x1,0x0
+label:
+sw x6,0x4(x2)
+lw x7,0x4(x2)
+jal x1,top
