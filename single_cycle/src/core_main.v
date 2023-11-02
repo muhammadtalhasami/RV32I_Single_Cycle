@@ -21,7 +21,10 @@ module core_main (
     wire store;
 
     // INSTRUCTION MEMORY
-    c_mem u_instruction_mem0 (
+    memory_top#(
+      .INIT_MEM(1)
+    )
+    u_instruction_mem0 (
         .clk(clk),
         .we_re(instruction_mem_we_re),
         .request(instruction_mem_request),
@@ -53,7 +56,7 @@ module core_main (
 
 
     // DATA MEMORY
-    c_mem u_data_memory0(
+    memory_top u_data_memory0(
         .clk(clk),
         .we_re(data_mem_we_re),
         .request(data_mem_request),

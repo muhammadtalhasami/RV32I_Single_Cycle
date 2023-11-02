@@ -1,4 +1,7 @@
-module c_mem(
+module c_mem#
+(
+    parameter  INIT_MEM = 0
+)(
     input wire clk,
     input wire request,
     input wire [7:0] address,
@@ -13,6 +16,7 @@ module c_mem(
     reg [31:0] mem [0:255];
 
     initial begin
+         if (INIT_MEM)
         $readmemh("tb/instr.mem",mem);
    end
     always @ (posedge clk) begin 
@@ -34,7 +38,7 @@ module c_mem(
             end
         end
 
-        if(request && we_re == 1'b0)begin
+        else if(request && !we_re)begin
             valid <= 1'b1;
             r_data<= mem[address];
         end
