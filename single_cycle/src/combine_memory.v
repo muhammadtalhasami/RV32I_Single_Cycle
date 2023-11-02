@@ -3,13 +3,11 @@ module c_mem#
     parameter  INIT_MEM = 0
 )(
     input wire clk,
-    input wire request,
     input wire [7:0] address,
     input wire [31:0] w_data,
     input wire [3:0] masking,
     input wire we_re,
 
-    output reg valid,
     output reg [31:0] r_data
 );
 
@@ -20,8 +18,7 @@ module c_mem#
         $readmemh("tb/instr.mem",mem);
    end
     always @ (posedge clk) begin 
-        valid <= 1'b0;
-        if(request && we_re)begin
+        if(we_re)begin
             // mem[address] <= w_data;
 
             if(masking[0]) begin
@@ -38,8 +35,7 @@ module c_mem#
             end
         end
 
-        else if(request && !we_re)begin
-            valid <= 1'b1;
+        else if(!we_re)begin
             r_data<= mem[address];
         end
     end

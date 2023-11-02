@@ -17,5 +17,6 @@ ${CORE_ROOT}/src/mux2_4.v
 ${CORE_ROOT}/src/pc_reg.v
 ${CORE_ROOT}/src/rd_address.v
 ${CORE_ROOT}/src/reg_file.v
+${CORE_ROOT}/src/memory_top.v
 ${CORE_ROOT}/src/wrapper_mem.v
 ${CORE_ROOT}/src/Writeback_stage.v

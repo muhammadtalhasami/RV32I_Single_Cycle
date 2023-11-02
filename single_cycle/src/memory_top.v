@@ -8,9 +8,18 @@ module memory_top #(
     input wire [3:0] masking,
     input wire we_re,
 
-    output wire valid,
-    output wire [31:0] r_data
+    output reg valid,
+    output reg [31:0] r_data
     );
+
+    always @(posedge clk or negedge rst ) begin
+        if(!rst)begin
+            valid<=0;
+        end
+        else begin
+            valid <= request;
+        end
+    end
 
     c_mem #(
       .INIT_MEM(INIT_MEM)
@@ -18,11 +27,9 @@ module memory_top #(
     u_instructionmem0 (
         .clk(clk),
         .we_re(we_re),
-        .request(request),
         .masking(masking),
         .address(address),
         .w_data(w_data),
-        .valid(valid),
         .r_data(r_data)
     );
 endmodule
