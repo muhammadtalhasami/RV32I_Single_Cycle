@@ -13,7 +13,7 @@ module c_mem(
     reg [31:0] mem [0:255];
 
     initial begin
-        $readmemh("instr.mem",mem);
+        $readmemh("tb/instr.mem",mem);
    end
     always @ (posedge clk) begin 
         valid <= 1'b0;

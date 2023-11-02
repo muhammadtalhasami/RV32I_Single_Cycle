@@ -1,10 +1,3 @@
-`include "controlunit.v"
-`include "immediategene.v"
-`include "branch.v"
-`include "reg_file.v"
-`include "mux2_4.v"
-`include "mux1_2.v"
-
 module decode_stage(
     input wire [31:0]data1,
     input wire clk,

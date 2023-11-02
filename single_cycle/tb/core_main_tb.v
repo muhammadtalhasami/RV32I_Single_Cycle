@@ -1,37 +1,37 @@
 `timescale 1ns/1ps
-module single_cycle_tb();
+module core_main_tb();
     reg clk;
     reg [31:0]instruction;
     reg rst;
     reg enable;
     wire[31:0] res_out;
 
-    single_cycle u_single_cycle
+    core_main u_core_main0
     (
         .clk(clk),
         .instruction(instruction),
         .rst(rst),
-        .en(enable)
+        .enable(enable)
     );
 
     initial begin
         clk = 0;
         rst = 1;
-        #5;
+        #10;
+       
         rst=0;
         enable = 0;
         #10;
 
         rst = 1;
-        #40;
+        #100;
         #60;
-
 
         $finish;       
     end
      initial begin
-       $dumpfile("single.vcd");
-       $dumpvars(0,single_cycle_tb);
+       $dumpfile("temp/coremain.vcd");
+       $dumpvars(0,core_main_tb);
     end
 
     always begin

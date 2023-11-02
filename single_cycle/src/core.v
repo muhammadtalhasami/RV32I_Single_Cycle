@@ -1,8 +1,3 @@
-`include "Decode_stage.v"
-`include "Execute_stage.v"
-`include "Fetch_stage.v"
-`include "Writeback_stage.v"
-`include "Memory_stage.v"
 module core(
     input wire clk,
     input wire rst,

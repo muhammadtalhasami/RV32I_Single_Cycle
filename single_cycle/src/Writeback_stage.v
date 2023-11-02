@@ -1,4 +1,3 @@
-`include "rd_address.v"
 module write_back (
     input wire [1:0]  mem_to_reg,
     input wire [31:0] alu_out,

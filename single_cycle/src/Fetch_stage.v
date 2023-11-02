@@ -1,4 +1,3 @@
-`include "pc_reg.v"
 module Fetch_stage(
 
   input wire clk,

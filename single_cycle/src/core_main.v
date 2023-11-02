@@ -1,5 +1,3 @@
-`include "core.v"
-`include "combine_memory.v"
 module core_main (
     input wire clk,
     input wire enable,
