@@ -29,7 +29,13 @@ module memory_stage (
     );
 
     always @ (*) begin
-        request = load | store ;
-        we_re = store ;
+        if(!valid)begin
+            request = 0;
+            we_re = 0;
+        end
+        else begin
+            request = load | store ;
+            we_re = store ;
+        end
     end
 endmodule

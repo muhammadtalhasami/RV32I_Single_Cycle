@@ -25,6 +25,7 @@ module core_main (
       .INIT_MEM(1)
     )
     u_instruction_mem0 (
+        .rst(rst),
         .clk(clk),
         .we_re(instruction_mem_we_re),
         .request(instruction_mem_request),
@@ -58,6 +59,7 @@ module core_main (
     // DATA MEMORY
     memory_top u_data_memory0(
         .clk(clk),
+        .rst(rst),
         .we_re(data_mem_we_re),
         .request(data_mem_request),
         .address(alu_out_address[9:2]),

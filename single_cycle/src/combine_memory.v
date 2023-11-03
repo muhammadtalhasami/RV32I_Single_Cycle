@@ -7,6 +7,7 @@ module c_mem#
     input wire [31:0] w_data,
     input wire [3:0] masking,
     input wire we_re,
+    input wire request,
 
     output reg [31:0] r_data
 );
@@ -18,7 +19,7 @@ module c_mem#
         $readmemh("tb/instr.mem",mem);
    end
     always @ (posedge clk) begin 
-        if(we_re)begin
+        if(request && we_re)begin
             // mem[address] <= w_data;
 
             if(masking[0]) begin
@@ -35,7 +36,7 @@ module c_mem#
             end
         end
 
-        else if(!we_re)begin
+        else if(request && !we_re)begin
             r_data<= mem[address];
         end
     end

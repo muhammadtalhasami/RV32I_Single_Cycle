@@ -1,6 +1,7 @@
 module memory_top #(
     parameter INIT_MEM = 0
 )(
+    input wire rst,
     input wire clk,
     input wire request,
     input wire [7:0] address,
@@ -9,7 +10,7 @@ module memory_top #(
     input wire we_re,
 
     output reg valid,
-    output reg [31:0] r_data
+    output wire [31:0] r_data
     );
 
     always @(posedge clk or negedge rst ) begin
@@ -24,12 +25,13 @@ module memory_top #(
     c_mem #(
       .INIT_MEM(INIT_MEM)
     )
-    u_instructionmem0 (
+    u_mem0 (
         .clk(clk),
         .we_re(we_re),
         .masking(masking),
         .address(address),
         .w_data(w_data),
+        .request(request),
         .r_data(r_data)
     );
 endmodule
