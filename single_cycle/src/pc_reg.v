@@ -12,10 +12,13 @@ module pc (
     input wire [31:0]jalr_address,
     input wire [31:0]address_in,
 
-    output reg [31:0]address_out
+    output reg [31:0]address_out,
+    output wire [31:0]pre_address_out
 );
 
-always @(posedge clk or negedge rst) begin
+    reg [31:0]pre_address;
+
+    always @(posedge clk or negedge rst) begin
         if(!rst)begin
             address_out <= 0;
         end
@@ -28,11 +31,14 @@ always @(posedge clk or negedge rst) begin
         else if (jalr)begin
             address_out <= jalr_address;
         end
-        else if(load & !dmem_valid)begin
+        else if((load && !dmem_valid))begin
             address_out <=  address_out;
         end
-            else begin
+        else begin
             address_out <= address_out + 32'd4;
         end
+        pre_address<=address_out;
     end
+    
+    assign pre_address_out = pre_address;
 endmodule

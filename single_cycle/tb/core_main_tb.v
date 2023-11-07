@@ -25,7 +25,7 @@ module core_main_tb();
 
         rst = 1;
         #100;
-        #60;
+        #100;
 
         $finish;       
     end

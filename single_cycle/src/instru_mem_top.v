@@ -1,4 +1,4 @@
-module memory_top #(
+module instruc_mem_top #(
     parameter INIT_MEM = 0
 )(
     input wire rst,

@@ -17,8 +17,8 @@ module Fetch_stage(
   output reg request,
   output reg [3:0] mask,
   output wire [31:0] address_out,
-  output reg  [31:0] instruction
-
+  output reg  [31:0] instruction,
+  output wire [31:0] pre_address_pc
 );
 
 
@@ -37,11 +37,12 @@ module Fetch_stage(
     .jalr_address(alu_res),
     .branch_address(alu_res),
     .address_in(0),
+    .pre_address_out(pre_address_pc),
     .address_out(address_out)
   );
 
   always@(*)begin
-    if(load & !valid)begin
+    if((load && !valid))begin
       mask = 4'b1111; 
       we_re = 1'b0;
       request = 1'b0;

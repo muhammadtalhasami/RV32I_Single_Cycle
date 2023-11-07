@@ -6,6 +6,7 @@ module core(
     input wire [31:0] instruction,
     input wire [31:0] load_data_in,
     
+    output wire load_signal,
     output wire instruction_mem_we_re,
     output wire instruction_mem_request,
     output wire data_mem_we_re,
@@ -36,7 +37,7 @@ module core(
     wire [31:0]alu_res_out;
     wire [31:0] wrap_load_out;
     wire [31:0] opb_data;
-
+    wire [31:0] pre_address_pc;
     // FETCH_STAGE
     Fetch_stage u_fetch_stage0 
     (
@@ -55,16 +56,16 @@ module core(
         .mask(instruc_mask_singal),
         .we_re(instruction_mem_we_re),
         .request(instruction_mem_request),
-        .address_out(pc_address_out)
+        .pre_address_pc(pre_address_pc),
+        .address_out(pc_address)
     );
-     assign pc_address = pc_address_out ;
 
     //DECODE STAGE
     decode_stage u_dec0(
         .clk(clk),
         .rst(rst),
         .data1(instruc_data_out),
-        .program_counter(pc_address_out),
+        .program_counter(pre_address_pc),
         .rd_wb_data(rd_wb_data),
         .load(load),
         .store(store),
@@ -80,6 +81,7 @@ module core(
         .opb_mux_out(opb_mux_out)
     );
     
+    assign load_signal =load;
     //EXECUTE_STAGE
     execute u_execute0 
     (
@@ -112,7 +114,7 @@ module core(
         .mem_to_reg(rd_sel),
         .alu_out(alu_res_out),
         .data_mem_out(wrap_load_out),
-        .pc_address(pc_address_out),
+        .pc_address(pc_address),
         .u_immo(u_immediate),
         .rd_sel_mux_out(rd_wb_data)
     );    

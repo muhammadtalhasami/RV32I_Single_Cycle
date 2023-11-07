@@ -19,9 +19,10 @@ module core_main (
     wire data_mem_we_re;
     wire data_mem_request;
     wire store;
+    wire load;
 
     // INSTRUCTION MEMORY
-    memory_top#(
+    instruc_mem_top#(
       .INIT_MEM(1)
     )
     u_instruction_mem0 (
@@ -40,6 +41,7 @@ module core_main (
     core u_core(
         .clk(clk),
         .rst(rst),
+        .load_signal(load),
         .instruction(instruction_data),
         .load_data_in(load_data_out),
         .mask_singal(mask),
@@ -57,9 +59,10 @@ module core_main (
 
 
     // DATA MEMORY
-    memory_top u_data_memory0(
+    data_mem_top u_data_memory0(
         .clk(clk),
         .rst(rst),
+        .load(load),
         .we_re(data_mem_we_re),
         .request(data_mem_request),
         .address(alu_out_address[9:2]),
