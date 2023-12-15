@@ -4,6 +4,7 @@ module decode_stage(
     input wire rst,
     input wire [31:0]program_counter,
     input wire [31:0] rd_wb_data,
+    input wire valid,
 
     output wire load,
     output wire store,
@@ -56,6 +57,7 @@ module decode_stage(
         .opcode(data1[6:0]),
         .fun3(data1[14:12]),
         .fun7(data1[30]),
+        .valid(valid),
         .reg_write(reg_write),
         .rd_sel(rd_sel),
         .imm_sel(imm_sel),

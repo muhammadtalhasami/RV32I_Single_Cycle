@@ -36,7 +36,6 @@ always @(*) begin
     //imm_sel = i_type | store| branch ;
     Load = load;
     Store = store;
-    mem_to_reg = load;
     Branch =  branch;
     Jal = 1'b0;
     Jalr = 1'b0;

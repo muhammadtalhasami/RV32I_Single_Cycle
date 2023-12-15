@@ -1,16 +1,19 @@
-module type_decoder (opcode,r_type,i_type,load,store,branch,jal,jalr,lui,auipc);
+module type_decoder (
 
-    input wire [6:0]opcode;
+    input wire [6:0]opcode,
+    input wire valid,
     
-    output reg r_type;
-    output reg i_type; 
-    output reg load;
-    output reg store;
-    output reg branch; 
-    output reg jal;
-    output reg jalr;
-    output reg lui;
-    output reg auipc;
+    output reg r_type,
+    output reg i_type, 
+    output reg load,
+    output reg store,
+    output reg branch, 
+    output reg jal,
+    output reg jalr,
+    output reg lui,
+    output reg auipc
+
+);
 
     always @(*) begin
         case(opcode)
@@ -37,6 +40,18 @@ module type_decoder (opcode,r_type,i_type,load,store,branch,jal,jalr,lui,auipc);
             auipc = 1'b0;
         end
         7'b0000011 : begin
+            if(valid)begin
+            load = 1'b0;
+            r_type = 1'b0;
+            i_type  = 1'b0;
+            store = 1'b0;
+            branch = 1'b0;
+            auipc = 1'b0;
+            jalr = 1'b0;
+            lui = 1'b0;
+            jal = 1'b0;
+            end
+            else begin
             load = 1'b1;
             r_type = 1'b0;
             i_type  = 1'b0;
@@ -46,6 +61,7 @@ module type_decoder (opcode,r_type,i_type,load,store,branch,jal,jalr,lui,auipc);
             jalr = 1'b0;
             lui = 1'b0;
             jal = 1'b0;
+            end
         end
         7'b0100011 : begin
             store = 1'b1;

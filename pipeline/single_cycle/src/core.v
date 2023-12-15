@@ -38,6 +38,8 @@ module core(
     wire [31:0] wrap_load_out;
     wire [31:0] opb_data;
     wire [31:0] pre_address_pc;
+    wire [31:0] pre_address_pc_pp;
+    wire [31:0] instruc_data_out_pp;
     // FETCH_STAGE
     Fetch_stage u_fetch_stage0 
     (
@@ -60,12 +62,27 @@ module core(
         .address_out(pc_address)
     );
 
+    //fetch_pipeline
+    Fetch_pipe u_fet_pip0
+    (
+        .clk(clk),
+        .Jal(Jal),
+        .Jal_r(Jalr),
+        .load(load),
+        .branch(branch_result),
+        .pre_address_pc(pre_address_pc),
+        .instruction(instruc_data_out),
+        .pre_address_pc_pp(pre_address_pc_pp),
+        .instruction_pp(instruc_data_out_pp)
+    );
+
     //DECODE STAGE
     decode_stage u_dec0(
         .clk(clk),
         .rst(rst),
-        .data1(instruc_data_out),
-        .program_counter(pre_address_pc),
+        .valid(data_mem_valid),
+        .data1(instruc_data_out_pp),
+        .program_counter(pre_address_pc_pp),
         .rd_wb_data(rd_wb_data),
         .load(load),
         .store(store),
@@ -96,7 +113,7 @@ module core(
         .load(load),
         .store(store),
         .op_b(op_b),
-        .instruction(instruc_data_out),
+        .instruction(instruc_data_out_pp),
         .alu_out_address(alu_res_out),
         .wrap_load_in(load_data_in),
         .mask(mask),
@@ -114,7 +131,7 @@ module core(
         .mem_to_reg(rd_sel),
         .alu_out(alu_res_out),
         .data_mem_out(wrap_load_out),
-        .pc_address(pc_address),
+        .pc_address(pre_address_pc_pp),
         .u_immo(u_immediate),
         .rd_sel_mux_out(rd_wb_data)
     );    

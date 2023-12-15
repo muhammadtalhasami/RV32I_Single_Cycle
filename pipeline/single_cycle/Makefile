@@ -1,4 +1,4 @@
-export CORE_ROOT=/home/talha/practice/single_cycle
+export CORE_ROOT=/home/talha/RV32I_Single_Cycle/pipeline
 
 all: icarus
 

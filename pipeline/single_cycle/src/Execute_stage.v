@@ -3,6 +3,7 @@ module execute (
     input wire [31:0]b_i,
     input wire [3:0]alu_control,
 
+
     output wire [31:0]alu_out
 
 );

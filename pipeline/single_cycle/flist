@@ -21,3 +21,5 @@ ${CORE_ROOT}/src/data_mem_top.v
 ${CORE_ROOT}/src/instru_mem_top.v
 ${CORE_ROOT}/src/wrapper_mem.v
 ${CORE_ROOT}/src/Writeback_stage.v
+${CORE_ROOT}/src/Fetch_pipe.v
+
