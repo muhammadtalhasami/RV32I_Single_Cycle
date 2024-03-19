@@ -21,7 +21,7 @@ To get started with the RV32I fetch pipeline microprocessor, follow these steps:
 1. Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/muhammadtalhasami/RV32I_Single_Cycle)
+git clone https://github.com/muhammadtalhasami/RV32I_Single_Cycle.git
 ```
 
 ## Contribution Guidelines
