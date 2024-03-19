@@ -1,4 +1,6 @@
 # RV32I Fetch Pipeline Microprocessor
+![RV32I Fetch Pipeline Microprocessor Image](![Screenshot from 2024-03-19 22-35-53](https://github.com/muhammadtalhasami/RV32I_Single_Cycle/assets/141629485/019febde-0848-4ea4-9289-8e0daf7f9e41)
+)
 
 This repository contains an implementation of a RV32I fetch pipeline microprocessor. The RV32I is a 32-bit RISC-V instruction set architecture, with the 'I' extension indicating the base integer instructions.
 
