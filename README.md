@@ -32,6 +32,6 @@ Contributions to improve the RV32I fetch pipeline microprocessor are welcome! If
 2. Create a new branch for your feature or bug fix: git checkout -b feature-name.
 3. Make your changes and commit them with a descriptive message: git commit -m "Description of your changes".
 4. Push your changes to your fork: git push origin feature-name.
-5.Submit a pull request to the main repository's master branch.
+5. Submit a pull request to the main repository's master branch.
 
 Please ensure that your code follows the project's coding style and conventions. Also, include tests for any new functionality or fixes you implement.
