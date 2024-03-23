@@ -32,7 +32,8 @@ For gtkwave run this
 gtkwave temp/coremain.vcd
 ```
 
-There is a flowing Test programs giving below with its dump code so simply you have to copy paste that dump code on instru_mem file in test bench folder name(tb)
+There is a flowing Test programs giving below with its dump code 
+so simply you have to copy paste that dump code on instru.mem file in test bench folder name(tb)
 
 ### Test cases
 
