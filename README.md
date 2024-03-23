@@ -168,7 +168,7 @@ jal x7,end
 break:
 ```
 
-#### Dump code 4
+#### Dump code 
 ```
 00000093
 00100113
