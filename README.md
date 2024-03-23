@@ -24,9 +24,28 @@ To get started with the RV32I fetch pipeline microprocessor, follow these steps:
 git clone https://github.com/muhammadtalhasami/RV32I_Single_Cycle
 ```
 
-### Test cases 
+### Test cases
 
 #### Program 1
+```
+top:
+addi x2,x0,10
+add  x2,x2,x2
+jal x1,jump
+addi x3,x2,30
+lui x4,1
+auipc x5,0x1000
+bne x2,x3,label
+jump:
+add x6,x3,x2
+jalr x0,x1,0x0
+label:
+sw x6,0x4(x2)
+lw x7,0x4(x2)
+jal x1,top
+```
+
+#### Program 2
 ```
 addi x5 x0 0
 addi x6 x0 5
@@ -39,7 +58,7 @@ jal LOOP
 ANS: lw x7 100(x0)
 
 ```
-#### Program 2
+#### Program 3
 ```
 addi x5 x0 3
 LOOP:
@@ -50,7 +69,7 @@ lw x7 100(x5)
 bne x5 x7 LOOP
 
 ```
-#### Program 3
+#### Program 4
 ```
 addi x5 x0 0
 addi x7 x0 1
