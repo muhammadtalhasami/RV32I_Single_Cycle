@@ -58,7 +58,6 @@ jal x1,top
 00612223
 00412383
 FD5FF0EF
-
 ```
 
 #### Program 2
@@ -72,12 +71,10 @@ sw x5 100(x0)
 beq x5 x6 ANS
 jal LOOP
 ANS: lw x7 100(x0)
-
 ```
 
 #### Dump code 2
 ```
-
 00000293
 00500313
 00530433
@@ -98,19 +95,16 @@ addi x6 x0 7
 sw x6 100(x5)
 lw x7 100(x5)
 bne x5 x7 LOOP
-
 ```
 
 #### Dump code 3
 ```
-
 00300293
 00128293
 00700313
 0662A223
 0642A383
 FE7298E3
-
 ```
 
 #### Program 4
@@ -130,7 +124,6 @@ END:
 
 #### Dump code 4
 ```
-
 00000293
 00100393
 00A00313
@@ -140,8 +133,6 @@ END:
 007002B3
 01D003B3
 FF1FF0EF
-
-
 ```
 
 #### Fibonacci Series:
@@ -179,7 +170,6 @@ break:
 
 #### Dump code 4
 ```
-
 00000093
 00100113
 00400513
@@ -206,9 +196,6 @@ FE5FF3EF
 1001A803
 00418193
 FF5FF3EF
-
-
-
 ```
 
 ## Contribution Guidelines
