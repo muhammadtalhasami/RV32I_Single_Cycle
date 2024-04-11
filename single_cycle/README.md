@@ -1,60 +1,20 @@
-# RV32I Fetch Pipeline Microprocessor
-<img src="https://github.com/muhammadtalhasami/RV32I_Single_Cycle/assets/141629485/019febde-0848-4ea4-9289-8e0daf7f9e41" alt="RV32I Fetch Pipeline Microprocessor Image">
+## RV32I Single Cycle Processor Implementation on verilog
 
-This repository contains an implementation of a RV32I fetch pipeline microprocessor. The RV32I is a 32-bit RISC-V instruction set architecture, with the 'I' extension indicating the base integer instructions.
 
-## Overview
+<img src="https://github.com/muhammadtalhasami/rv32I_single_cycle_logisim/blob/main/single%20cycle%20logisim.jpeg">
 
-The RV32I fetch pipeline microprocessor is designed to efficiently fetch and execute RV32I instructions. It consists of several stages including instruction fetch, decode, execute, memory access, and write back. Each stage is optimized for performance and minimal latency.
+This project implements a single-cycle processor based on the RV32I instruction set architecture using Verilog HDL. The processor supports 32-bit RISC-V instructions and executes them in a single clock cycle.
 
-## Features
+Single Cycle Processor
+Features
 
-- RV32I instruction set support
-- Pipelined architecture for improved throughput
-- Efficient instruction fetch mechanism
-- Modular design for easy expansion and customization
+    RV32I Instruction Set: Full support for the RV32I instruction set architecture, including arithmetic, logical, control transfer, and memory access instructions.
+    Single Cycle Execution: Each instruction is executed in a single clock cycle, simplifying the design and providing deterministic performance.
+    Modular Design: The processor is designed with modularity in mind, facilitating easy expansion and modification for future enhancements or customizations.
+    Documentation: Comprehensive documentation is provided to explain the design choices, implementation details, and usage instructions.
 
-## Getting Started
 
-To get started with the RV32I fetch pipeline microprocessor, follow these steps:
 
-1. Clone this repository to your local machine:
-
-```bash
-git clone https://github.com/muhammadtalhasami/RV32I_Single_Cycle
-```
-
-## Compilation
-
-For compilation you have too run make and for clean use make clean 
-For gtkwave run this 
-```
-gtkwave temp/coremain.vcd
-```
-
-There is a flowing Test programs giving below with its dump code 
-so simply you have to copy paste that dump code on instru.mem file in test bench folder name(tb)
-
-### Test cases
-
-#### Program 1
-```
-top:
-addi x2,x0,10
-add  x2,x2,x2
-jal x1,jump
-addi x3,x2,30
-lui x4,1
-auipc x5,0x1000
-bne x2,x3,label
-jump:
-add x6,x3,x2
-jalr x0,x1,0x0
-label:
-sw x6,0x4(x2)
-lw x7,0x4(x2)
-jal x1,top
-```
 #### Dump code 1
 ```
 00A00113
@@ -209,14 +169,19 @@ FE5FF3EF
 FF5FF3EF
 ```
 
-## Contribution Guidelines
 
-Contributions to improve the RV32I fetch pipeline microprocessor are welcome! If you'd like to contribute, please follow these guidelines:
+## Getting Started
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix: git checkout -b feature-name.
-3. Make your changes and commit them with a descriptive message: git commit -m "Description of your changes".
-4. Push your changes to your fork: git push origin feature-name.
-5. Submit a pull request to the main repository's master branch.
+To simulate the RV32I single-cycle processor on your local machine, follow these steps:
 
-Please ensure that your code follows the project's coding style and conventions. Also, include tests for any new functionality or fixes you implement.
+Clone the Repository: Clone this GitHub repository to your local machine using the following command:
+
+
+
+    git clone git@github.com:muhammadtalhasami/RV32I_Single_Cycle.git
+
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request. Please follow the contribution guidelines when contributing to this project.
+
