@@ -1,35 +1,34 @@
 `timescale 1ns/1ps
-module single_cycle_tb();
+module microprocessor_tb();
     reg clk;
     reg [31:0]instruction;
     reg rst;
-    reg enable;
+
     wire[31:0] res_out;
 
-    single_cycle u_single_cycle
+    microprocessor u_microprocessor0
     (
         .clk(clk),
         .instruction(instruction),
-        .rst(rst),
-        .en(enable)
+        .rst(rst)
     );
 
     initial begin
         clk = 0;
         rst = 1;
-        #5;
+        #10;
         rst=0;
-        enable = 0;
         #10;
 
         rst = 1;
-        #40;
+        #120;
+        #80;
 
         $finish;       
     end
      initial begin
-       $dumpfile("single.vcd");
-       $dumpvars(0,single_cycle_tb);
+       $dumpfile("temp/microprocessor.vcd");
+       $dumpvars(0,microprocessor_tb);
     end
 
     always begin

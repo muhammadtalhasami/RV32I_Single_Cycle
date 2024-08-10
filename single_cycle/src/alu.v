@@ -18,10 +18,10 @@ module alu (a_i,b_i,op_i,res_o);
             res_o = a_i << b_i; //shift left logical
         end
         else if (op_i==4'b0011) begin
-            res_o = ($signed (a_i) < $signed (b_i))? 1 : 0; //set less then
+            res_o = $signed (a_i) < $signed (b_i); //shift less then
         end 
         else if (op_i==4'b0100) begin
-            res_o = (a_i < b_i)? 1 : 0; //set less then unsigned
+            res_o = a_i < b_i; //shift less then unsigned
         end          
         else if (op_i==4'b0101) begin
             res_o = a_i ^ b_i; //xor
@@ -37,6 +37,9 @@ module alu (a_i,b_i,op_i,res_o);
         end
         else if (op_i==4'b1001) begin
             res_o = a_i & b_i; //and
+        end
+        else if (op_i==4'b1111) begin
+            res_o = b_i; //for lui 
         end
         else begin
             res_o = 0;

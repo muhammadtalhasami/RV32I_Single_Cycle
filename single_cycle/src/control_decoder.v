@@ -13,33 +13,39 @@ module control_decoder (
 
     output reg Load,
     output reg Store,
-    output reg mem_to_reg,
+    output reg [1:0] mem_to_reg,
     output reg reg_write,
     output reg mem_en,
     output reg operand_b,
+    output reg operand_a,
     output reg [2:0]imm_sel,
     output reg Branch,
-    output reg Jal,
-    output reg [1:0]rd_sel,
-    output reg [3:0]alu_control,
-    output reg Jalr,
-    output reg Auipc,
-    output reg Lui
+    output reg next_sel,
+    output reg [3:0]alu_control
 );
 
 always @(*) begin
-    reg_write = r_type | i_type | load | jal |jalr |lui |auipc;
-    operand_b = i_type | load | store | branch | jal |jalr |auipc;
-    //imm_sel = i_type | store| branch ;
+    //reg write signal for register file
+    reg_write = r_type | i_type | load | jal | jalr | lui | auipc;
+    //operand a select for first input of alu
+    operand_a = branch | jal | auipc;
+    //operand b signal for second input of alu
+    operand_b = i_type | load | store | branch | jal | jalr | lui | auipc;
+    //load
     Load = load;
+    //store
     Store = store;
+    // signal for write back data in register file either alu and data memory
     mem_to_reg = load;
+    //branch
     Branch =  branch;
-    Jal = 1'b0;
-    Jalr = 1'b0;
+    //selection for next address if any jump instrucion run
+    next_sel = jal | jalr ;
+    //mem enable
+    mem_en = store;
 
     if(r_type)begin //rtype
-    rd_sel = 2'b00;
+        mem_to_reg = 2'b00;
         if(fun3==3'b000 & fun7==0)begin
             alu_control = 4'b0000;
         end
@@ -72,8 +78,8 @@ always @(*) begin
         end
     end
     else if (i_type)begin //itype
-        rd_sel = 2'b00;
-        imm_sel = 3'b001;//i_type selection
+        imm_sel = 3'b000; //i_type selection
+        mem_to_reg = 2'b00;
         if(fun3==3'b000 & fun7==0)begin
             alu_control = 4'b0000;
         end
@@ -103,8 +109,8 @@ always @(*) begin
         end
     end
     else if (store) begin //store
-       imm_sel = 3'b000;//store selection
-        mem_en = 1;
+        imm_sel = 3'b001; //store selection
+        mem_to_reg = 2'b00;
         if (fun3==3'b000)begin //sb
             alu_control = 4'b0000;
             //signal = 2'b00;
@@ -119,8 +125,8 @@ always @(*) begin
         end
     end
     else if (load) begin
-        rd_sel = 2'b01;
-       imm_sel = 3'b001;//i_type selection
+        imm_sel = 3'b000; //i_type selection
+        mem_to_reg = 2'b01;
         if (fun3==3'b000)begin //lb
             alu_control = 4'b0000;
         end
@@ -142,28 +148,26 @@ always @(*) begin
     end
     else if (branch)begin
         alu_control = 4'b0000;
-        imm_sel = 3'b010;//branch selection
+        mem_to_reg = 2'b00;
+        imm_sel = 3'b010; //branch selection
     end
     else if (jal)begin
-        rd_sel = 2'b10;
-        Jal = jal;
         alu_control = 4'b0000;
-        imm_sel = 3'b011;//jal selection
+        mem_to_reg = 2'b10;
+        imm_sel = 3'b011; //jal selection
     end
-    else if(jalr)begin
-        Jalr = jalr;
-        rd_sel = 2'b10;
+    if(jalr)begin
+        mem_to_reg = 2'b00;
         alu_control = 4'b0000;
-        imm_sel = 3'b001;//i_type selection
+        imm_sel = 3'b000;//i_type selection
     end
-        else if(lui)begin
-        rd_sel = 2'b11;
-        Lui =lui;
+    else if(lui)begin
+        mem_to_reg = 2'b00;
         imm_sel = 3'b100;//u_type selection
+        alu_control = 4'b1111;
     end
-        else if(auipc)begin
-        rd_sel = 2'b00;
-        Auipc =auipc;
+    else if(auipc)begin
+        mem_to_reg = 2'b00;
         alu_control = 4'b0000;
         imm_sel = 3'b100;//u_type selection
     end
